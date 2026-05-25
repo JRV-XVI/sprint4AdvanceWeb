@@ -1,0 +1,41 @@
+# Define el tipo Post (estructura de datos que se puede consultar en la API)
+type Post {
+    id: ID!
+    title: String,
+    content: String,
+    author: String,
+    genre: String,
+    imageUrl: String,
+    weapon: String,
+    explosions: Int,
+    typeOfComedy: String,
+    memeCount: Int,
+    monster: String,
+    goreLevel: Int,
+    createdAt: String,
+    updatedAt: String,
+    deletedAt: String,
+}
+
+# Define el input PostDto (datos que el cliente puede enviar para crear/guardar un Post)
+input PostDto{
+    title: String,
+    content: String,
+    author: String,
+    imageUrl: String,
+}
+
+# Define las consultas disponibles para obtener datos (queries)
+type Query{
+    getAllPosts: [Post]
+    getRecentPosts(count:Int,offset:Int): [Post]
+    getPostById(id: ID!): Post
+    #Important------
+    getPostsByGenre(genre: String!): [Post]
+}
+
+# Define las operaciones para modificar datos (mutations)
+type Mutation{
+    deletePostById(id:ID!): Post
+    savePost(postDto: PostDto!): Post
+}
