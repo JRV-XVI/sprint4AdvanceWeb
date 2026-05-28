@@ -15,14 +15,18 @@ public class Post {
     private String title;
     private String content;
     private String author;
-    private String genre;
+    private String genre; // Lo usaremos como 'Category' (BLOCK, WEAPON, FOOD, MOB)
     private String imageUrl;
-    private String weapon;
-    private Integer explosions;
-    private String typeOfComedy;
-    private Integer memeCount;
-    private String monster;
-    private Integer goreLevel;
+    
+    // Minecraft fields
+    private String material;
+    private Integer durability;
+    private String enchantment;
+    private Integer damage;
+    private String biome;
+    private Integer foodPoints;
+    private String effect;
+    
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;

@@ -16,18 +16,18 @@ export default function Example() {
 
     Esto representa el patrón Observer.
     */
-    const [genre, setGenre] = useState("ACTION");
+    const [genre, setGenre] = useState("BLOCK");
 
 
 
     /*
     ==================================================
-    ESTADO DE PELÍCULAS
+    ESTADO DE ITEMS
     ==================================================
 
     Guarda la información obtenida desde GraphQL.
     */
-    const [movies, setMovies] = useState([]);
+    const [items, setItems] = useState([]);
 
 
 
@@ -45,42 +45,41 @@ export default function Example() {
     QUERIES DINÁMICOS
     ==================================================
 
-    Cada género solicita información distinta.
-
-    Esto simula cómo Netflix solicita
-    diferentes datos dependiendo de la vista.
+    Cada categoría solicita información distinta,
+    simulando cómo la UI puede requerir campos
+    diferentes para un Bloque, Arma, o Comida.
     */
     const queries = {
 
-        ACTION: `
+        BLOCK: `
             query {
-                getPostsByGenre(genre:"ACTION") {
+                getPostsByGenre(genre:"BLOCK") {
                     id
                     title
-                    weapon
-                    explosions
+                    material
+                    durability
                 }
             }
         `,
 
-        COMEDY: `
+        WEAPON: `
             query {
-                getPostsByGenre(genre:"COMEDY") {
+                getPostsByGenre(genre:"WEAPON") {
                     id
                     title
-                    typeOfComedy
-                    memeCount
+                    damage
+                    enchantment
                 }
             }
         `,
 
-        HORROR: `
+        FOOD: `
             query {
-                getPostsByGenre(genre:"HORROR") {
+                getPostsByGenre(genre:"FOOD") {
                     id
                     title
-                    monster
-                    goreLevel
+                    foodPoints
+                    effect
                 }
             }
         `
@@ -102,13 +101,13 @@ export default function Example() {
 
     Cuando genre cambia:
     - React detecta el cambio
-    - ejecuta automáticamente getMovies()
+    - ejecuta automáticamente getItems()
 
     Esto es comportamiento Observer.
     */
     useEffect(() => {
 
-        getMovies();
+        getItems();
 
     }, [genre]);
 
@@ -119,7 +118,7 @@ export default function Example() {
     FETCH GRAPHQL
     ==================================================
     */
-    const getMovies = async () => {
+    const getItems = async () => {
 
         try {
 
@@ -165,7 +164,7 @@ export default function Example() {
 
                 setError(data.errors[0]?.message);
 
-                setMovies([]);
+                setItems([]);
 
                 return;
             }
@@ -178,9 +177,9 @@ export default function Example() {
             ==========================================
 
             React actualizará automáticamente la UI
-            cuando movies cambie.
+            cuando items cambie.
             */
-            setMovies(
+            setItems(
                 data?.data?.getPostsByGenre ?? []
             );
 
@@ -194,7 +193,7 @@ export default function Example() {
 
             setError("Error de conexión");
 
-            setMovies([]);
+            setItems([]);
         }
     };
 
@@ -204,10 +203,10 @@ export default function Example() {
 
         <div>
 
-            <h1>Netflix Dynamic GraphQL</h1>
+            <h1>Minecraft Items Dynamic GraphQL (Observer)</h1>
 
-            <p>
-                Género actual:
+            <p style={{ marginTop: '10px', fontSize: '14px', lineHeight: '1.6' }}>
+                Categoría actual:
                 <strong>
                     {" "}
                     {genre}
@@ -229,29 +228,11 @@ export default function Example() {
 
             Flujo completo Observer.
             ====================================== */}
-            <div className="genres">
+            <div className="genres" style={{ margin: '20px 0', border: '1px solid #a2a9b1', padding: '10px', background: '#f8f9fa', display: 'flex', gap: '10px'}}>
 
-                <button
-                    onClick={() => setGenre("ACTION")}
-                >
-                    Acción
-                </button>
-
-
-
-                <button
-                    onClick={() => setGenre("COMEDY")}
-                >
-                    Comedia
-                </button>
-
-
-
-                <button
-                    onClick={() => setGenre("HORROR")}
-                >
-                    Terror
-                </button>
+                <button onClick={() => setGenre("BLOCK")}>Blocks</button>
+                <button onClick={() => setGenre("WEAPON")}>Weapons</button>
+                <button onClick={() => setGenre("FOOD")}>Food</button>
 
             </div>
 
@@ -275,94 +256,71 @@ export default function Example() {
                 RENDERIZADO REACTIVO
             ======================================
 
-            Cuando movies cambia:
+            Cuando items cambie:
             React vuelve a renderizar automáticamente.
             */}
-            <div className="movies-container">
+            <div className="movies-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '15px' }}>
 
                 {
-                    movies.map((movie) => (
+                    items.map((movie) => (
 
                         <div
                             className="movie-card"
+                            style={{ border: '1px solid #a2a9b1', backgroundColor: '#f8f9fa', padding: '12px' }}
                             key={movie.id}
                         >
 
-                            <h3>
+                            <h3 style={{ borderBottom: '1px solid #a2a9b1', paddingBottom: '4px', fontSize: '16px', margin: '0 0 10px 0', color: '#000'}}>
                                 {movie.title}
                             </h3>
 
 
 
-                            {/* ACTION */}
-                            {movie.weapon && (
+                            {/* BLOCK */}
+                            {movie.material && (
 
-                                <p>
-                                    Weapon:
+                                <p style={{ fontSize: '14px', margin: '2px 0'}}>
+                                    <strong>Material:</strong>
                                     {" "}
-                                    {movie.weapon}
+                                    {movie.material}
                                 </p>
 
                             )}
 
 
 
-                            {movie.explosions && (
+                            {movie.durability && (
 
-                                <p>
-                                    Explosions:
+                                <p style={{ fontSize: '14px', margin: '2px 0'}}>
+                                    <strong>Durability:</strong>
                                     {" "}
-                                    {movie.explosions}
+                                    {movie.durability}
                                 </p>
 
                             )}
 
 
 
-                            {/* COMEDY */}
-                            {movie.typeOfComedy && (
+                            {/* WEAPON */}
+                            {movie.damage && (
 
-                                <p>
-                                    Comedy:
+                                <p style={{ fontSize: '14px', margin: '2px 0'}}>
+                                    <strong>Damage:</strong>
                                     {" "}
-                                    {movie.typeOfComedy}
+                                    {movie.damage}
                                 </p>
 
                             )}
 
 
 
-                            {movie.memeCount && (
+                            {/* FOOD */}
+                            {movie.foodPoints && (
 
-                                <p>
-                                    Meme Count:
+                                <p style={{ fontSize: '14px', margin: '2px 0'}}>
+                                    <strong>Food Points:</strong>
                                     {" "}
-                                    {movie.memeCount}
-                                </p>
-
-                            )}
-
-
-
-                            {/* HORROR */}
-                            {movie.monster && (
-
-                                <p>
-                                    Monster:
-                                    {" "}
-                                    {movie.monster}
-                                </p>
-
-                            )}
-
-
-
-                            {movie.goreLevel && (
-
-                                <p>
-                                    Gore Level:
-                                    {" "}
-                                    {movie.goreLevel}
+                                    {movie.foodPoints}
                                 </p>
 
                             )}

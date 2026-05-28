@@ -18,20 +18,20 @@ public class PostRepository {
 
                 /*
                 =================================================
-                ACTION MOVIES
+                BLOCKS
                 =================================================
                 */
 
                 Post.builder()
                         .id(1L)
-                        .title("John Wick")
-                        .genre("ACTION")
+                        .title("Diamond Block")
+                        .genre("BLOCK")
 
-                        // ACTION FIELDS
-                        .weapon("Pistol")
-                        .explosions(45)
+                        // BLOCK FIELDS
+                        .material("Diamond")
+                        .durability(50)
 
-                        .imageUrl("https://example.com/johnwick.jpg")
+                        .imageUrl("https://minecraft.wiki/images/Block_of_Diamond_JE5_BE3.png")
 
                         .createdAt(LocalDateTime.now())
                         .updatedAt(LocalDateTime.now())
@@ -39,14 +39,14 @@ public class PostRepository {
 
                 Post.builder()
                         .id(2L)
-                        .title("Mad Max")
-                        .genre("ACTION")
+                        .title("Obsidian")
+                        .genre("BLOCK")
 
-                        // ACTION FIELDS
-                        .weapon("Shotgun")
-                        .explosions(120)
+                        // BLOCK FIELDS
+                        .material("Volcanic Glass")
+                        .durability(1200)
 
-                        .imageUrl("https://example.com/madmax.jpg")
+                        .imageUrl("https://minecraft.wiki/images/Obsidian_JE3_BE2.png")
 
                         .createdAt(LocalDateTime.now())
                         .updatedAt(LocalDateTime.now())
@@ -56,20 +56,21 @@ public class PostRepository {
 
                 /*
                 =================================================
-                COMEDY MOVIES
+                WEAPONS
                 =================================================
                 */
 
                 Post.builder()
                         .id(3L)
-                        .title("The Mask")
-                        .genre("COMEDY")
+                        .title("Diamond Sword")
+                        .genre("WEAPON")
 
-                        // COMEDY FIELDS
-                        .typeOfComedy("Slapstick")
-                        .memeCount(80)
+                        // WEAPON FIELDS
+                        .material("Diamond")
+                        .damage(7)
+                        .enchantment("Sharpness IV")
 
-                        .imageUrl("https://example.com/mask.jpg")
+                        .imageUrl("https://minecraft.wiki/images/Diamond_Sword_JE2_BE2.png")
 
                         .createdAt(LocalDateTime.now())
                         .updatedAt(LocalDateTime.now())
@@ -77,14 +78,15 @@ public class PostRepository {
 
                 Post.builder()
                         .id(4L)
-                        .title("Superbad")
-                        .genre("COMEDY")
+                        .title("Netherite Pickaxe")
+                        .genre("WEAPON")
 
-                        // COMEDY FIELDS
-                        .typeOfComedy("Teen Comedy")
-                        .memeCount(95)
+                        // WEAPON FIELDS
+                        .material("Netherite")
+                        .damage(6)
+                        .enchantment("Efficiency V")
 
-                        .imageUrl("https://example.com/superbad.jpg")
+                        .imageUrl("https://minecraft.wiki/images/Netherite_Pickaxe_JE3_BE2.png")
 
                         .createdAt(LocalDateTime.now())
                         .updatedAt(LocalDateTime.now())
@@ -94,20 +96,20 @@ public class PostRepository {
 
                 /*
                 =================================================
-                HORROR MOVIES
+                FOOD
                 =================================================
                 */
 
                 Post.builder()
                         .id(5L)
-                        .title("The Conjuring")
-                        .genre("HORROR")
+                        .title("Golden Apple")
+                        .genre("FOOD")
 
-                        // HORROR FIELDS
-                        .monster("Demon")
-                        .goreLevel(70)
+                        // FOOD FIELDS
+                        .foodPoints(4)
+                        .effect("Regeneration, Absorption")
 
-                        .imageUrl("https://example.com/conjuring.jpg")
+                        .imageUrl("https://minecraft.wiki/images/Golden_Apple_JE2_BE2.png")
 
                         .createdAt(LocalDateTime.now())
                         .updatedAt(LocalDateTime.now())
@@ -115,15 +117,60 @@ public class PostRepository {
 
                 Post.builder()
                         .id(6L)
-                        .title("It")
-                        .genre("HORROR")
+                        .title("Cooked Porkchop")
+                        .genre("FOOD")
 
-                        // HORROR FIELDS
-                        .monster("Clown")
-                        .goreLevel(90)
+                        // FOOD FIELDS
+                        .foodPoints(8)
+                        .effect("None")
 
-                        .imageUrl("https://example.com/it.jpg")
+                        .imageUrl("https://minecraft.wiki/images/Cooked_Porkchop_JE4_BE3.png")
 
+                        .createdAt(LocalDateTime.now())
+                        .updatedAt(LocalDateTime.now())
+                        .build(),
+
+                Post.builder()
+                        .id(7L)
+                        .title("Dirt")
+                        .genre("BLOCK")
+                        .material("Earth")
+                        .durability(10)
+                        .imageUrl("https://minecraft.wiki/images/Dirt_JE2_BE2.png")
+                        .createdAt(LocalDateTime.now())
+                        .updatedAt(LocalDateTime.now())
+                        .build(),
+
+                Post.builder()
+                        .id(8L)
+                        .title("Bow")
+                        .genre("WEAPON")
+                        .material("Wood & String")
+                        .damage(9)
+                        .enchantment("Power IV")
+                        .imageUrl("https://minecraft.wiki/images/Bow_JE2_BE1.png")
+                        .createdAt(LocalDateTime.now())
+                        .updatedAt(LocalDateTime.now())
+                        .build(),
+
+                Post.builder()
+                        .id(9L)
+                        .title("Bread")
+                        .genre("FOOD")
+                        .foodPoints(5)
+                        .effect("None")
+                        .imageUrl("https://minecraft.wiki/images/Bread_JE3_BE3.png")
+                        .createdAt(LocalDateTime.now())
+                        .updatedAt(LocalDateTime.now())
+                        .build(),
+
+                Post.builder()
+                        .id(10L)
+                        .title("Oak Log")
+                        .genre("BLOCK")
+                        .material("Wood")
+                        .durability(40)
+                        .imageUrl("https://minecraft.wiki/images/Oak_Log_(inventory)_MCE.png")
                         .createdAt(LocalDateTime.now())
                         .updatedAt(LocalDateTime.now())
                         .build()

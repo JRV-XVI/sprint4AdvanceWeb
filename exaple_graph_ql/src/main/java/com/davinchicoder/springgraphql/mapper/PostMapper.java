@@ -18,12 +18,13 @@ public class PostMapper implements Function<PostDto, Post> {
             .content(postDto.getContent())
             .genre(postDto.getGenre())
             .imageUrl(postDto.getImageUrl())
-            .weapon(postDto.getWeapon())
-            .explosions(postDto.getExplosions())
-            .typeOfComedy(postDto.getTypeOfComedy())
-            .memeCount(postDto.getMemeCount())
-            .monster(postDto.getMonster())
-            .goreLevel(postDto.getGoreLevel())
+            .material(postDto.getMaterial())
+            .durability(postDto.getDurability())
+            .enchantment(postDto.getEnchantment())
+            .damage(postDto.getDamage())
+            .biome(postDto.getBiome())
+            .foodPoints(postDto.getFoodPoints())
+            .effect(postDto.getEffect())
             .build();
     }
 }
