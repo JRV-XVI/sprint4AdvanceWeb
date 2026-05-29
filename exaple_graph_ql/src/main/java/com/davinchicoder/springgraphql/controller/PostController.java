@@ -2,9 +2,7 @@ package com.davinchicoder.springgraphql.controller;
 
 import com.davinchicoder.springgraphql.dto.PostDto;
 import com.davinchicoder.springgraphql.entity.Post;
-import com.davinchicoder.springgraphql.exception.PostNotFound;
-import com.davinchicoder.springgraphql.mapper.PostMapper;
-import com.davinchicoder.springgraphql.repository.PostRepository;
+import com.davinchicoder.springgraphql.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -19,47 +17,40 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
 
-    /** Repositorio para acceder y manipular datos de publicaciones. */
-    private final PostRepository postRepository;
-
-    /** Mapper para convertir PostDto a entidad Post. */
-    private final PostMapper postMapper;
+    private final PostService postService;
 
     @QueryMapping
     public List<Post> getPostsByGenre(@Argument String genre) {
-
-        return postRepository.getPostsByGenre(genre);
+        return postService.getPostsByGenre(genre);
     }
 
     /** Obtiene publicaciones recientes con paginación (count, offset). */
     @QueryMapping
     public List<Post> getRecentPosts(@Argument int count, @Argument int offset) {
-        return postRepository.getRecentPosts(count, offset);
+        return postService.getRecentPosts(count, offset);
     }
 
     /** Obtiene una publicación por su ID o lanza PostNotFound. */
     @QueryMapping
     public Post getPostById(@Argument Long id) {
-        return postRepository.getById(id).orElseThrow(PostNotFound::new);
+        return postService.getPostById(id);
     }
 
     /** Obtiene todas las publicaciones. */
     @QueryMapping
     public List<Post> getAllPosts() {
-        return postRepository.getAll();
+        return postService.getAllPosts();
     }
 
     /** Elimina una publicación por ID o lanza PostNotFound. */
     @MutationMapping
     public Post deletePostById(@Argument Long id) {
-
-        return postRepository.delete(id).orElseThrow(PostNotFound::new);
+        return postService.deletePostById(id);
     }
 
     /** Guarda una nueva publicación a partir de PostDto. */
     @MutationMapping
     public Post savePost(@Argument PostDto postDto) {
-        Post post = postMapper.apply(postDto);
-        return postRepository.save(post);
+        return postService.savePost(postDto);
     }
 }
